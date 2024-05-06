@@ -1,42 +1,92 @@
-let todoJoya = prompt("que haces loco, todo bien?")
-if (todoJoya != "si" && todoJoya != "no") {
-    alert("uhh me mataste, solo entiendo 'si' o 'no', pero acá te traigo calculadoras porque de matematicas si entiendo")
-} else if (todoJoya == "si") {
-    alert("buenisimo, te traigo calculadoras para que te diviertas")
-} else {
-    alert("mal ahi crack, pero te traigo calculadoras para que te diviertas")
+let respuesta;
+let estTramite = false;
+let colVehiculos = [];
+
+function registrarVehiculo(){
+    let marca = prompt("Inserte marca del vehiculo: \n");
+    marca = marca.toUpperCase();
+    let modelo = prompt("Inserte modelo del vehiculo: \n");
+    modelo = modelo.toUpperCase();
+    const anio = prompt("Inserte año de fabricación: \n");
+    class Vehiculo{
+        constructor(){
+            this.marca = marca;
+            this.modelo = modelo;
+            this.fabricacion = anio;
+        }
+    }
+    const vehiculoCreado = new Vehiculo(marca, modelo, anio);
+    return vehiculoCreado;
 }
+
+function consultaTramite(estadoTramite){
+    let tiempo;
+    tiempo = rng();
+    if (estadoTramite){
+        let coima = prompt("Le interesa coimear a un funcionario público para agilizar el trámite? \n 1- Si \n 2- No");
+        switch(coima){
+            case "1":
+                alert("Su vehículo estará registrado en aproximadamente " + tiempo + " segundos.");
+                break;
+            case "2":
+                alert("Su vehículo estará registrado en aproximadamente " + tiempo + " semanas.");
+                break;
+            default:
+                alert("Opción incorrecta, vuelva a intentar pulsando 1 o 2.");
+                break;
+        }
+    } else {
+        alert ("Usted no tiene registros en trámite.");
+    }
+}
+
+function rng(){ //esta función la utilizo para generar un numero aleatorio que despues lo uso como la cantidad de tiempo para los tramites.
+    let tiempo = 0;
+    tiempo = tiempo + (Math.random() * 100);
+    return Math.round(tiempo);
+}
+
+function listarVehiculo(lista, obj){
+    let nuevaCol = lista;
+    nuevaCol.push(obj);
+    return nuevaCol;
+}
+
+function objToString(lista){
+    if (lista.length > 0) {
+        let registroCompleto = "VEHÍCULOS REGISTRADOS: \n\n";
+        for (let i = 0; i < lista.length; i++) {
+            registroCompleto += "Marca: " + lista[i].marca + "\n";
+            registroCompleto += "Modelo: " + lista[i].modelo + "\n";
+            registroCompleto += "Año: " + lista[i].fabricacion + "\n\n"
+        }
+        return registroCompleto;
+    } else {
+        return ("No hay vehículos registrados.")
+    }
+}
+
+alert("Bienvenido/a al sistema de registro automotor, a continuación elija la opción que necesite.");
 do {
-    let respuesta = prompt("INSERTE OPCION: \n 1- Calculadora de circunferencias y esferas \n 2- Calculadora de triangulos equilateros \n 3- No me gustan las matematicas(salir)")
+    respuesta = prompt("INSERTE OPCIÓN: \n 1- Registrar un vehículo \n 2- Consultar estado de trámite \n 3- Lista de vehículos registrados \n 4- Salir");
     switch (respuesta) {
         case "1":
-            let radioCirc = prompt("Insertá un valor de radio para calcular una circunferencia y esfera: ")
-            let unMedidaCirc = prompt("Inserte unidad de medida (cm, m, km, etc): ")
-            function calcCirc(radio, medida){
-                let diametro = radio*2
-                let perimetro = diametro * Math.PI
-                let area = Math.PI * Math.pow(radio, 2)
-                let area3 = diametro * perimetro;
-                let volumen = 4/3 * Math.PI * Math.pow(radio, 3)
-                return alert("Longitud de radio: " + radio + medida + "\n El diametro mide: " + diametro + medida + "\n El perimetro mide: " + perimetro + medida + "\n el area de la circunferencia mide: " + area + medida + "2" + "\n la superficie de la esfera mide: " + area3 + medida + "2" + "\n el volumen de la esfera es de: " + volumen + medida + "3")
-            }
-            calcCirc(radioCirc, unMedidaCirc)
+            const vehiculoRegistrado = registrarVehiculo();
+            alert("el registro de su " + vehiculoRegistrado.marca + " " + vehiculoRegistrado.modelo + " año " + vehiculoRegistrado.fabricacion + " está en trámite.");
+            estTramite = true;
+            colVehiculos = listarVehiculo(colVehiculos, vehiculoRegistrado);
             break;
         case "2":
-            let ladoTri = prompt("Inserte longitud de lado: ")
-            let unMedidaTri = prompt("Inserte unidad de medida (cm, m, km, etc): ")
-            function calcTri(lado, medida) {
-                let perimetroTri = lado * 3;
-                let areaTri = (Math.sqrt(3)/4) * (Math.pow(lado, 2));
-                return alert("el lado del triangulo es: " + lado + medida + "\n el perimetro del triangulo es: " + perimetroTri + medida + "\n el area del triangulo es: " + areaTri + medida + "2")
-            }
-            calcTri(ladoTri, unMedidaTri)
+            consultaTramite(estTramite);
             break;
         case "3":
-            alert("Bueno chau entonces")
+            alert(objToString(colVehiculos));
+            break;
+        case "4":
+            alert("Muchas gracias por utilizar el registro automotor.");
             break;
         default:
-            alert("che flaco, las opciones estaban CLARISIMAS. Probá de nuevo")
+            alert("Opción incorrecta, vuelva a intentar pulsando un número del 1 al 4.");
             break;
     }
-} while (respuesta != "3");
+} while (respuesta != "4");
