@@ -1,0 +1,83 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+main > section{
+    height: 90%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    background-color: aliceblue;
+}
+main > section > h6{
+    margin-bottom: 4%;
+}
+main > section > article {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main > section > .betHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+main > section > .betHolder > .button{
+    margin-right: 10%;
+}
+main > section > .betHolder > .betBtn{
+    margin: 0 10px 0 0;
+}
+main > section > .betHolder > .betBtn2{
+    margin: 0 0 0 10px;
+}
+main > section > article > .contenedorFiguras{
+    height: 100%;
+    width: 200%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main > section > article > .contenedorFiguras > .figuras{
+    border: 5px solid black;
+    height: 100%;
+    margin: 10px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: -3px 1px 10px 0 gray;
+}
+main > section > article > .contenedorFiguras > .figuras > .fig{
+    box-shadow: -3px 1px 5px 0 gray;
+    padding: 25%;
+}
+.amarillo{
+    background-color: yellow;
+    border-radius: 10px 85px 10px 85px;
+    border: 5px solid gold;
+}
+.naranja{
+    border-radius: 100%;
+    background-color: orange;
+    border: 5px solid tomato;
+}
+.cian{
+    transform: rotate(-45deg);
+    background-color: cyan;
+    border: 5px solid steelblue;
+    border-radius: 20px;
+}

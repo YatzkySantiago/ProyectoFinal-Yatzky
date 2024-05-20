@@ -1,92 +1,74 @@
-let respuesta;
-let estTramite = false;
-let colVehiculos = [];
-
-function registrarVehiculo(){
-    let marca = prompt("Inserte marca del vehiculo: \n");
-    marca = marca.toUpperCase();
-    let modelo = prompt("Inserte modelo del vehiculo: \n");
-    modelo = modelo.toUpperCase();
-    const anio = prompt("Inserte año de fabricación: \n");
-    class Vehiculo{
-        constructor(){
-            this.marca = marca;
-            this.modelo = modelo;
-            this.fabricacion = anio;
+function spin(){
+    generateDivs();
+    for (let i = 0; i < 3; i++) {
+        let colorPicker = rng();
+        if (colorPicker > 9000) {
+            figura = document.getElementById("fig" + (i + 1));
+            figura.className += " cian";
+        } else if (colorPicker < 6999 && colorPicker > 3999) {
+            figura = document.getElementById("fig" + (i + 1));
+            figura.className += " naranja";
+        } else {
+            let figura = document.getElementById("fig" + (i + 1));
+            figura.className += " amarillo";
         }
     }
-    const vehiculoCreado = new Vehiculo(marca, modelo, anio);
-    return vehiculoCreado;
 }
 
-function consultaTramite(estadoTramite){
-    let tiempo;
-    tiempo = rng();
-    if (estadoTramite){
-        let coima = prompt("Le interesa coimear a un funcionario público para agilizar el trámite? \n 1- Si \n 2- No");
-        switch(coima){
-            case "1":
-                alert("Su vehículo estará registrado en aproximadamente " + tiempo + " segundos.");
-                break;
-            case "2":
-                alert("Su vehículo estará registrado en aproximadamente " + tiempo + " semanas.");
-                break;
-            default:
-                alert("Opción incorrecta, vuelva a intentar pulsando 1 o 2.");
-                break;
-        }
+function generateDivs(){
+    const sectionContainer = document.getElementById("cont-fig");
+    while (sectionContainer.firstChild) {
+        sectionContainer.removeChild(sectionContainer.firstChild);
+    }
+    for (let i = 0; i < 3; i++) {
+        const newDiv = document.createElement("div");
+        const figCont = document.createElement("div");
+        sectionContainer.appendChild(newDiv);
+        newDiv.appendChild(figCont);
+        newDiv.className = "figuras";
+        figCont.className = "fig";
+        figCont.id = "fig" + (i + 1);
+    }
+}
+
+function rng() {
+    let numRandom = parseInt(Math.random()*10000);
+    return numRandom;
+}
+
+function modificar(betBtnClick) {
+    if (betBtnClick == "-" && bet > 1) {
+        bet -= 1;
+    } else if (betBtnClick == "+") {
+        bet += 1;
     } else {
-        alert ("Usted no tiene registros en trámite.");
+        bet = 0.5;
     }
+    const betPrice = document.getElementById("bet-price");
+    betPrice.innerText = bet;
 }
 
-function rng(){ //esta función la utilizo para generar un numero aleatorio que despues lo uso como la cantidad de tiempo para los tramites.
-    let tiempo = 0;
-    tiempo = tiempo + (Math.random() * 100);
-    return Math.round(tiempo);
-}
+let bet = 0.5;
 
-function listarVehiculo(lista, obj){
-    let nuevaCol = lista;
-    nuevaCol.push(obj);
-    return nuevaCol;
-}
+const slotSpin = document.getElementById("btn");
+const betHolder = document.getElementById("bet-holder");
 
-function objToString(lista){
-    if (lista.length > 0) {
-        let registroCompleto = "VEHÍCULOS REGISTRADOS: \n\n";
-        for (let i = 0; i < lista.length; i++) {
-            registroCompleto += "Marca: " + lista[i].marca + "\n";
-            registroCompleto += "Modelo: " + lista[i].modelo + "\n";
-            registroCompleto += "Año: " + lista[i].fabricacion + "\n\n"
-        }
-        return registroCompleto;
-    } else {
-        return ("No hay vehículos registrados.")
-    }
-}
+const plusBtn = document.createElement("button");
+const showBet = document.createElement("p");
+const subBtn = document.createElement("button");
 
-alert("Bienvenido/a al sistema de registro automotor, a continuación elija la opción que necesite.");
-do {
-    respuesta = prompt("INSERTE OPCIÓN: \n 1- Registrar un vehículo \n 2- Consultar estado de trámite \n 3- Lista de vehículos registrados \n 4- Salir");
-    switch (respuesta) {
-        case "1":
-            const vehiculoRegistrado = registrarVehiculo();
-            alert("el registro de su " + vehiculoRegistrado.marca + " " + vehiculoRegistrado.modelo + " año " + vehiculoRegistrado.fabricacion + " está en trámite.");
-            estTramite = true;
-            colVehiculos = listarVehiculo(colVehiculos, vehiculoRegistrado);
-            break;
-        case "2":
-            consultaTramite(estTramite);
-            break;
-        case "3":
-            alert(objToString(colVehiculos));
-            break;
-        case "4":
-            alert("Muchas gracias por utilizar el registro automotor.");
-            break;
-        default:
-            alert("Opción incorrecta, vuelva a intentar pulsando un número del 1 al 4.");
-            break;
-    }
-} while (respuesta != "4");
+betHolder.appendChild(plusBtn);
+betHolder.appendChild(showBet);
+betHolder.appendChild(subBtn);
+
+plusBtn.innerText = "+";
+subBtn.innerText = "-";
+showBet.innerText = bet;
+
+showBet.id = "bet-price"
+plusBtn.className = "btn btn-primary betBtn";
+subBtn.className = "btn btn-primary betBtn2"
+
+slotSpin.addEventListener("click", spin);
+plusBtn.addEventListener("click", () => modificar("+"));
+subBtn.addEventListener("click", () => modificar("-"));
