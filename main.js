@@ -82,7 +82,7 @@ function logFnc(e){
     e.preventDefault();
     let form = e.target;
     username = form.children[0].value;
-    balance = form.children[1].value;
+    balance = parseInt(form.children[1].value);
     const loginSection = document.getElementById("section-login");
     const slotSection = document.getElementById("section-slot");
     slotSection.className += "a";
@@ -91,6 +91,7 @@ function logFnc(e){
 
 function addBalanceFnc() {
     balanceForm.className += "a";
+    addBalance.className += " displayNone";
 }
 
 function balFnc(e) {
@@ -99,6 +100,7 @@ function balFnc(e) {
     balance = parseInt(balForm.children[0].value) + balance;
     userInfo.innerText = "User: " + username +"\n Balance: " + balance;
     balanceForm.className = " displayNone";
+    addBalance.className += "a";
 }
 
 let bet = 0.5;
@@ -112,6 +114,7 @@ const submitButton = document.getElementById("submitBtn");
 const infoBox = document.getElementById("message-box");
 const winLog = document.getElementById("win-log");
 const balanceForm = document.getElementById("add-balance-form");
+const balanceFormSubmit = document.getElementById("submit-balance-btn");
 
 const plusBtn = document.createElement("button");
 const showBet = document.createElement("p");
@@ -136,6 +139,7 @@ showBet.id = "bet-price"
 plusBtn.className = "btn btn-primary betBtn";
 subBtn.className = "btn btn-primary betBtn2"
 addBalance.className = "btn btn-primary";
+balanceFormSubmit.className = "btn btn-primary"
 
 slotSpin.onclick = () => balanceMod(bet);
 plusBtn.onclick = () => modBet("+");
