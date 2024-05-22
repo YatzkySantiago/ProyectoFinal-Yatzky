@@ -1,3 +1,11 @@
+class newWin{
+    constructor(betValue, multi, prize){
+        this.betValue = betValue;
+        this.multi = multi;
+        this.prize = prize;
+    }
+}
+
 function balanceMod(bet) {
     if (bet <= balance) {
         balance = balance - bet;
@@ -31,17 +39,54 @@ function spin() {
             figValC++;
         }
     }
-    if (figValA == 3) {
+    prizeFnc(figValA, figValB, figValC);
+}
+
+function prizeFnc(a, b, c) {
+    if (a == 3) {
         balance = balance + (bet * 100);
         winText.innerText = "You won: " + (bet * 100);
-    } else if (figValB == 3) {
+        const win = new newWin(bet, "x100", (bet*100));
+        winsArray.push(win);
+        generateWinCards();
+    } else if (b == 3) {
         balance = balance + (bet * 5);
         winText.innerText = "You won: " + (bet * 5);
-    } else if (figValC == 3) {
+        const win = new newWin(bet, "x5", (bet*5));
+        winsArray.push(win);
+        generateWinCards();
+    } else if (c == 3) {
         balance = balance + (bet * 2);
         winText.innerText = "You won: " + (bet * 2);
+        const win = new newWin(bet, "x2", (bet*2));
+        winsArray.push(win);
+        generateWinCards();
     } else {
         winText.innerText = "You won: 0";
+    }
+    if (winsArray.length > 5) {
+        winsArray.shift();
+    }
+    
+}
+
+function generateWinCards() {
+    const winsShowcase = document.getElementById("array-showcase");
+    localStorage.setItem("spinWins", JSON.stringify(winsArray));
+    let winnerSpin = JSON.parse(localStorage.getItem("spinWins"));
+    while (winsShowcase.firstChild) {
+        winsShowcase.removeChild(winsShowcase.firstChild);
+    }
+    for(i = 0 ; i < winnerSpin.length ; i++){
+        let value = winnerSpin[i];
+        const winCard = document.createElement("div");
+        const winInfo = document.createElement("p");
+        winsShowcase.appendChild(winCard);
+        winCard.appendChild(winInfo);
+        winCard.className = "card";
+        winInfo.innerText = "$" + value["betValue"];
+        winInfo.innerText += value["multi"];
+        winInfo.innerText += "\n $" + value["prize"];
     }
 }
 
@@ -85,12 +130,14 @@ function logFnc(e){
     balance = parseInt(form.children[1].value);
     const loginSection = document.getElementById("section-login");
     const slotSection = document.getElementById("section-slot");
-    slotSection.className += "a";
+    slotSection.className = "a";
     loginSection.className += " displayNone";
+    winsShowcase.className = "a";
+    h2.className = "a";
 }
 
 function addBalanceFnc() {
-    balanceForm.className += "a";
+    balanceForm.className = "a";
     addBalance.className += " displayNone";
 }
 
@@ -103,9 +150,11 @@ function balFnc(e) {
     addBalance.className += "a";
 }
 
+let winsArray = [];
 let bet = 0.5;
 let username = form.children[0].value;
 let balance = form.children[1].value;
+let colWins = JSON.parse(localStorage.getItem("spinWins"));
 
 const slotSpin = document.getElementById("btn");
 const betHolder = document.getElementById("bet-holder");
@@ -115,13 +164,16 @@ const infoBox = document.getElementById("message-box");
 const winLog = document.getElementById("win-log");
 const balanceForm = document.getElementById("add-balance-form");
 const balanceFormSubmit = document.getElementById("submit-balance-btn");
+const winsShowcase = document.getElementById("array-showcase");
+const h2 = document.getElementById("h2");
 
 const plusBtn = document.createElement("button");
 const showBet = document.createElement("p");
 const subBtn = document.createElement("button");
 const userInfo = document.createElement("p");
 const addBalance = document.createElement("button");
-const winText = document.createElement("p")
+const winText = document.createElement("p");
+
 
 betHolder.appendChild(plusBtn);
 betHolder.appendChild(showBet);
@@ -135,11 +187,11 @@ subBtn.innerText = "-";
 showBet.innerText = bet;
 addBalance.innerText = "Add Balance";
 
-showBet.id = "bet-price"
+showBet.id = "bet-price";
 plusBtn.className = "btn btn-primary betBtn";
-subBtn.className = "btn btn-primary betBtn2"
+subBtn.className = "btn btn-primary betBtn2";
 addBalance.className = "btn btn-primary";
-balanceFormSubmit.className = "btn btn-primary"
+balanceFormSubmit.className = "btn btn-primary";
 
 slotSpin.onclick = () => balanceMod(bet);
 plusBtn.onclick = () => modBet("+");
