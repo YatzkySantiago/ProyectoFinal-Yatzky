@@ -1,4 +1,4 @@
-class newWin{
+class newWin{ //Clase que genera un objeto con los datos de cada tirada ganadora.
     constructor(betValue, multi, prize){
         this.betValue = betValue;
         this.multi = multi;
@@ -6,7 +6,7 @@ class newWin{
     }
 }
 
-function balanceMod(bet) {
+function balanceMod(bet) { //Funcion que se encarga de restar la apuesta del balance por cada tirada.
     if (bet <= balance) {
         balance = balance - bet;
         spin();
@@ -18,7 +18,7 @@ function balanceMod(bet) {
     }
 }
 
-function spin() {
+function spin() { //Funcion principal. Recibe un numero aleatorio y en base al intervalo perteneciente le asigna a la figura una clase.
     generateDivs();
     let figValA = 0;
     let figValB = 0;
@@ -42,7 +42,7 @@ function spin() {
     prizeFnc(figValA, figValB, figValC);
 }
 
-function prizeFnc(a, b, c) {
+function prizeFnc(a, b, c) { //Funcion que se encarga de calcular la ganancia de cada tirada.
     if (a == 3) {
         balance = balance + (bet * 100);
         winText.innerText = "You won: " + (bet * 100);
@@ -70,7 +70,7 @@ function prizeFnc(a, b, c) {
     
 }
 
-function generateWinCards() {
+function generateWinCards() { //Genera las tarjetas que muestran las ultimas ganancias.
     const winsShowcase = document.getElementById("array-showcase");
     localStorage.setItem("spinWins", JSON.stringify(winsArray));
     let winnerSpin = JSON.parse(localStorage.getItem("spinWins"));
@@ -90,7 +90,7 @@ function generateWinCards() {
     }
 }
 
-function generateDivs() {
+function generateDivs() { //Genera los contenedores del slot y las figuras.
     const sectionContainer = document.getElementById("cont-fig");
     while (sectionContainer.firstChild) {
         sectionContainer.removeChild(sectionContainer.firstChild);
@@ -106,12 +106,12 @@ function generateDivs() {
     }
 }
 
-function rng() {
+function rng() { //Generador de numero aleatorio para asignar a cada figura.
     let numRandom = parseInt(Math.random() * 10000);
     return numRandom;
 }
 
-function modBet(betBtnClick) {
+function modBet(betBtnClick) { //Esta funcion se encarga de aumentar la apuesta de cada tirada.
     if (betBtnClick == "-" && bet > 1) {
         bet -= 1.5;
     } else if (betBtnClick == "+") {
@@ -123,7 +123,7 @@ function modBet(betBtnClick) {
     betPrice.innerText = bet;
 }
 
-function logFnc(e){
+function logFnc(e){ //Funcion para el submit del login, recibe usuario y saldo inicial.
     e.preventDefault();
     let form = e.target;
     username = form.children[0].value;
@@ -136,12 +136,12 @@ function logFnc(e){
     h2.className = "a";
 }
 
-function addBalanceFnc() {
+function addBalanceFnc() { //Esta funcion muestra/esconde elementos del HTML al presionar un boton.
     balanceForm.className = "a";
     addBalance.className += " displayNone";
 }
 
-function balFnc(e) {
+function balFnc(e) { //Esta funcion se encarga de agregar fondos a la cuenta.
     e.preventDefault();
     let balForm = e.target;
     if (parseInt(balForm.children[0].value) >= 0) {
