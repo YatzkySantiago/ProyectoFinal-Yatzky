@@ -9,6 +9,7 @@ main{
     display: flex;
     flex-flow: column;
     height: 150vh;
+    background-color: aliceblue;
 }
 main > section{
     width: 100%;
@@ -16,7 +17,6 @@ main > section{
     justify-content: center;
     align-items: center;
     flex-flow: column;
-    background-color: aliceblue;
 }
 main > #array-showcase {
     padding-top: 10px;
@@ -31,17 +31,17 @@ main > #array-showcase > .card{
     align-items: center;
     flex-flow: column;
     margin: 20px;
+    box-shadow: -3px 1px 10px 0 gray;
 }
 main > #section-title {
-    height: 10%;
-    padding: 100px;
+    padding: 50px;
     text-align: center;
 }
 main > #section-slot{
     height: 50%;
 }
 main > #section-login {
-    height: 50%;
+    height: 20%;
     width: 100%;
 }
 main > #section-slot > h6{

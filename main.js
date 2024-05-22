@@ -83,7 +83,7 @@ function generateWinCards() {
         const winInfo = document.createElement("p");
         winsShowcase.appendChild(winCard);
         winCard.appendChild(winInfo);
-        winCard.className = "card";
+        winCard.className = "card text-bg-primary";
         winInfo.innerText = "$" + value["betValue"];
         winInfo.innerText += value["multi"];
         winInfo.innerText += "\n $" + value["prize"];
@@ -144,10 +144,12 @@ function addBalanceFnc() {
 function balFnc(e) {
     e.preventDefault();
     let balForm = e.target;
-    balance = parseInt(balForm.children[0].value) + balance;
-    userInfo.innerText = "User: " + username +"\n Balance: " + balance;
-    balanceForm.className = " displayNone";
-    addBalance.className += "a";
+    if (parseInt(balForm.children[0].value) >= 0) {
+        balance = parseInt(balForm.children[0].value) + balance;
+        userInfo.innerText = "User: " + username +"\n Balance: " + balance;
+        balanceForm.className = " displayNone";
+        addBalance.className += "a";
+    }
 }
 
 let winsArray = [];
