@@ -123,17 +123,17 @@ function modBet(betBtnClick) { //Esta funcion se encarga de aumentar la apuesta 
     betPrice.innerText = bet;
 }
 
-function logFnc(e){ //Funcion para el submit del login, recibe usuario y saldo inicial.
+//Funcion para el submit del login, recibe usuario y saldo inicial.
+function logFnc(e) {
     e.preventDefault();
     let form = e.target;
     username = form.children[0].value;
     balance = parseInt(form.children[1].value);
-    const loginSection = document.getElementById("section-login");
-    const slotSection = document.getElementById("section-slot");
-    slotSection.className = "a";
-    loginSection.className += " displayNone";
-    winsShowcase.className = "a";
-    h2.className = "a";
+    document.getElementById("section-login").classList.add("displayNone");
+    document.getElementById("section-slot").classList.remove("displayNone");
+    winsShowcase.classList.remove("displayNone");
+    h2.classList.remove("displayNone");
+    userInfo.innerText = `User: ${username}\n Balance: ${balance}`;
 }
 
 function addBalanceFnc() { //Esta funcion muestra/esconde elementos del HTML al presionar un boton.
@@ -176,18 +176,14 @@ const userInfo = document.createElement("p");
 const addBalance = document.createElement("button");
 const winText = document.createElement("p");
 
-
-betHolder.appendChild(plusBtn);
-betHolder.appendChild(showBet);
-betHolder.appendChild(subBtn);
-infoBox.appendChild(addBalance);
-infoBox.appendChild(userInfo);
-winLog.appendChild(winText);
-
 plusBtn.innerText = "+";
 subBtn.innerText = "-";
 showBet.innerText = bet;
 addBalance.innerText = "Add Balance";
+
+betHolder.append(plusBtn, showBet, subBtn);
+document.getElementById("message-box").append(addBalance, userInfo);
+document.getElementById("win-log").appendChild(winText);
 
 showBet.id = "bet-price";
 plusBtn.className = "btn btn-primary betBtn";
