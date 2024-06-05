@@ -34,7 +34,7 @@ main > #array-showcase > .card{
     box-shadow: -3px 1px 10px 0 gray;
 }
 main > #section-title {
-    padding: 50px;
+    padding-bottom: 50px;
     text-align: center;
 }
 main > #section-slot{
@@ -43,9 +43,6 @@ main > #section-slot{
 main > #section-login {
     height: 20%;
     width: 100%;
-}
-main > #section-slot > h6{
-    margin-bottom: 4%;
 }
 main > #section-slot > .articleFiguras {
     height: 90%;
@@ -72,10 +69,6 @@ main > #section-slot > .messageBox {
 }
 main > #section-slot > .messageBox > p {
     margin: 10px;
-}
-main > #section-slot > .winLog {
-    padding-bottom: 20px;
-    text-align: center;
 }
 main > #section-slot > .betHolder > .button{
     margin-right: 10%;
@@ -105,23 +98,32 @@ main > #section-slot > article > .contenedorFiguras > .figuras{
     background-color: white;
     box-shadow: -3px 1px 10px 0 gray;
 }
-main > #section-slot > article > .contenedorFiguras > .figuras > .fig{
-    box-shadow: -3px 1px 5px 0 gray;
-    padding: 25%;
-}
 .amarillo{
     background-color: yellow;
     border-radius: 10% 65% 10% 65%;
     border: 5px solid gold;
+    box-shadow: -3px 1px 5px 0 gray;
+    padding: 25%;
 }
 .naranja{
     border-radius: 100%;
     background-color: orange;
     border: 5px solid tomato;
+    box-shadow: -3px 1px 5px 0 gray;
+    padding: 25%;
 }
 .cian{
     transform: rotate(-45deg);
     background-color: cyan;
     border: 5px solid steelblue;
     border-radius: 25%;
+    box-shadow: -3px 1px 5px 0 gray;
+    padding: 25%;
+}
+
+.badToast{
+    background: linear-gradient(to right, #ff1100, #cc4c43);
+}
+.goodToast{
+    background: linear-gradient(to right, #00b09b, #96c93d);
 }
