@@ -8,7 +8,7 @@
 main{
     display: flex;
     flex-flow: column;
-    height: 150vh;
+    height: 110vh;
     background-color: aliceblue;
 }
 main > section{
@@ -34,7 +34,7 @@ main > #array-showcase > .card{
     box-shadow: -3px 1px 10px 0 gray;
 }
 main > #section-title {
-    padding-bottom: 50px;
+    padding: 30px;
     text-align: center;
 }
 main > #section-slot{
@@ -80,7 +80,7 @@ main > #section-slot > .betHolder > .betBtn2{
     margin: 0 0 0 10px;
 }
 main > #section-slot > article > .contenedorFiguras{
-    height: 80%;
+    height: 90%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -97,6 +97,7 @@ main > #section-slot > article > .contenedorFiguras > .figuras{
     border-radius: 20px;
     background-color: white;
     box-shadow: -3px 1px 10px 0 gray;
+    padding: 15px;
 }
 .amarillo{
     background-color: yellow;
