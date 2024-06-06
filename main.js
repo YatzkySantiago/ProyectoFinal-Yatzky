@@ -29,13 +29,13 @@ function spin() { //Funcion que se encarga de la asignacion de valor a las figur
     let figValC = 0;
     for (let i = 0; i < 3; i++) {
         let figId = "fig" + (i + 1);
-        let spinInterval = setInterval(async () => {
-            let colorPicker = await rng();
+        let spinInterval = setInterval(() => {
+            let randomNum = realRng();
             let figura = document.getElementById(figId);
             figura.className = '';
-            if (colorPicker == "unknown" || colorPicker == "stellar") {
+            if (randomNum >= 18) {
                 figura.className += " cian";
-            } else if (colorPicker == "dark" || colorPicker == "fairy" || colorPicker == "dragon" || colorPicker == "ice" || colorPicker == "psychic" || colorPicker == "electric" || colorPicker == "grass" || colorPicker == "water") {
+            } else if (randomNum <= 17 && randomNum >10) {
                 figura.className += " naranja";
             } else {
                 figura.className += " amarillo";
@@ -61,6 +61,11 @@ function spin() { //Funcion que se encarga de la asignacion de valor a las figur
             }
         }, 1000 + i * 500);
     }
+}
+
+function realRng() {
+    let numRandom2 = Math.floor(Math.random() * 19) + 1;
+    return numRandom2;
 }
 
 function prizeFnc(a, b, c) { //Funcion que se encarga de calcular la ganancia de cada tirada.
