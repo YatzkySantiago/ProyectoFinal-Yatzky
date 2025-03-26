@@ -30,26 +30,26 @@ function spin() { //Funcion que se encarga de la asignacion de valor a las figur
     for (let i = 0; i < 3; i++) {
         let figId = "fig" + (i + 1);
         let spinInterval = setInterval(() => {
-            let randomNum = realRng();
+            let colorPicker = rng();
             let figura = document.getElementById(figId);
             figura.className = '';
-            if (randomNum >= 18) {
+            if (colorPicker > 9000) {
                 figura.className += " cian";
-            } else if (randomNum <= 17 && randomNum >10) {
+            } else if (colorPicker < 6999 && colorPicker > 3000) {
                 figura.className += " naranja";
             } else {
                 figura.className += " amarillo";
             }
         }, 25);
-        setTimeout(async () => {
+        setTimeout(() => {
             clearInterval(spinInterval);
-            let colorPicker = await rng();
+            let colorPicker = rng();
             let figura = document.getElementById(figId);
             figura.className = '';
-            if (colorPicker == "unknown" || colorPicker == "stellar") {
+            if (colorPicker > 9000) {
                 figura.className += " cian";
                 figValA++;
-            } else if (colorPicker == "dark" || colorPicker == "fairy" || colorPicker == "dragon" || colorPicker == "ice" || colorPicker == "psychic" || colorPicker == "electric" || colorPicker == "grass" || colorPicker == "water") {
+            } else if (colorPicker < 6999 && colorPicker > 3000) {
                 figura.className += " naranja";
                 figValB++;
             } else {
@@ -148,11 +148,9 @@ function generateDivs() { //Genera los contenedores del slot y las figuras.
     }
 }
 
-function rng() {
-    let numRandom = Math.floor(Math.random() * 19) + 1;
-    return fetch('https://pokeapi.co/api/v2/type/' + numRandom)
-        .then((response) => response.json())
-        .then((json) => json.name);
+function rng() { //Generador de numero aleatorio para asignar a cada figura.
+    let numRandom = parseInt(Math.random() * 10000);
+    return numRandom;
 }
 
 function modBet(betBtnClick) { //Esta funcion se encarga de aumentar la apuesta de cada tirada.
